@@ -8,22 +8,39 @@ router.get("/about", (req,res) => {
     res.send("ABOUT PAGE");
 })
 
-router.get("/chargepoint", (req,res) => {
+router.get("/chargepoint_manufacturer", (req,res) => {
     client.connect(() => {
         const db = client.db("EVHS");
         const collection = db.collection("chargepoint_manufacturer");
-        collection.find().toArray((err,chargePoint) => {
+        collection.find().toArray((err,chargepoint_manufacturer) => {
             if(err){
                 res.send("ERROR:", err);
             }
             else{
-                res.json(chargePoint);
+                res.json(chargepoint_manufacturer);
             }
             client.close();
         })
     })
 })
 
+
+router.get("/chargepoint_model", (req,res) => {
+    client.connect(() => {
+        const db = client.db("EVHS");
+        const collection = db.collection("chargepoint_model");
+        collection.find().toArray((err, chargePoint_model)=> {
+            if(err){
+                res.send("ERROR:", err)
+            }
+            else{
+                res.json(chargePoint_model);
+            }
+            client.close();
+        })
+    })
+
+})
 
 
 
